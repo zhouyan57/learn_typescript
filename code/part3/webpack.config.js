@@ -1,5 +1,9 @@
 // 引入一个包
 const path = require('path');
+// 引入html插件 (自动生成html文件并且引入相关资源)
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+// 引入clean插件
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // webpack中的所有的配置信息都应该写在module.exports中
 module.exports = {
@@ -20,6 +24,8 @@ module.exports = {
         }
     },
 
+    mode: 'development',
+
     // 指定webpack打包时要使用模块
     module: {
         // 指定要加载的规则
@@ -33,5 +39,19 @@ module.exports = {
                 exclude: /node-modules/
             }
         ]
+    },
+
+    // 配置Webpack插件
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HTMLWebpackPlugin({
+            // title: "这是一个自定义的title",
+            template: "./src/index.html"
+        }),
+    ],
+
+    // 用来设置引用模块
+    resolve: {
+        extensions: ['.ts', '.js'] // 可作为模块使用
     }
 }
