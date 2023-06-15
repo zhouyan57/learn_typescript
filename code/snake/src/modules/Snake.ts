@@ -25,9 +25,24 @@ class Snake{
 
     // 设置蛇头坐标
     set X(value){
+        // 新旧值相同，直接返回
+        if(this.X === value){
+            return 
+        }
+        // X值的合法范围 0-290
+        if(value < 0 || value > 290){
+            throw new Error('蛇撞墙了！')
+        }
+
         this.head.style.left = value + 'px';
     }
     set Y(value){
+        if(this.Y === value){
+            return 
+        }
+        if(value < 0 || value > 290){
+            throw new Error('蛇撞墙了！')
+        }
         this.head.style.top = value + 'px';
     }
 
